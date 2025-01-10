@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Building2, Heart } from "lucide-react";
+import axiosFetch from "../lib/axiosFetch";
 
 const LoginPage = () => {
   const [userType, setUserType] = useState<"vendor" | "foodbank">("vendor");
@@ -7,10 +8,30 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Logging in as:", userType, { email, password });
+    try {
+      const response = await axiosFetch.post("/auth/login", {
+        email,
+        password,
+      });
+
+      // Verify response structure and handle appropriately
+      const { error, message, jwt_token } = response.data;
+
+      if (error) {
+        throw new Error(message || "An error occurred");
+      }
+
+      // Store the token in localStorage
+      localStorage.setItem("vToken", jwt_token);
+
+      // Redirect to the home page using React Router if applicable
+      window.location.href = "/"; // Or use `navigate("/")` if using react-router
+    } catch (error) {
+      console.error("Error logging in", error);
+      // Optionally show a toast or an error message to the user
+    }
   };
 
   return (

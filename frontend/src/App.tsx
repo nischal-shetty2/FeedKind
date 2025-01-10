@@ -7,6 +7,7 @@ import Login from "./Pages/Login";
 import SignUpPage from "./Pages/Signup";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { Discount } from "./Pages/Discount";
 
 const App: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/discount" element={<SignUpPage />} />
+        <Route path="/discount" element={<Discount />} />
         <Route path="/postitems" element={<PostItemsPage />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
