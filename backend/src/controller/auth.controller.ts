@@ -63,6 +63,7 @@ const authRegister = async (
       error: false,
       message: "New user created!",
       jwt_token: token,
+      userId: user._id,
     });
     return;
   } catch (error) {
