@@ -13,7 +13,7 @@ const saltRounds = 10;
 const authRegister = async (
   request: Request<{}, {}, IUser>,
   response: Response
-): Promise<Response> => {
+): Promise<void> => {
   const {
     name,
     email,
@@ -57,33 +57,36 @@ const authRegister = async (
       { expiresIn: "7d" }
     );
 
-    return response.status(201).send({
+    response.status(201).send({
       error: false,
       message: "New user created!",
       jwt_token: token,
     });
+    return;
   } catch (error) {
     console.log(error);
-    return response.status(500).send({
+    response.status(500).send({
       error: true,
       message: "Something went wrong!",
     });
+    return;
   }
 };
 
 const authLogin = async (
   request: Request<{}, {}, { email: string; password: string }>,
   response: Response
-): Promise<Response> => {
+): Promise<void> => {
   const { email, password } = request.body;
 
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return response.status(404).send({
+      response.status(404).send({
         error: true,
         message: "Check email or password!",
       });
+      return;
     }
 
     const isMatch =
@@ -91,10 +94,11 @@ const authLogin = async (
         ? password == user.password
         : await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return response.status(404).send({
+      response.status(404).send({
         error: true,
         message: "Check email or password!",
       });
+      return;
     }
 
     const { password: userPassword, ...data } = user;
@@ -108,29 +112,25 @@ const authLogin = async (
       { expiresIn: "7d" }
     );
 
-    return response
-      .cookie("accessToken", token, { httpOnly: true })
-      .status(200)
-      .send({
-        error: false,
-        message: "Login successful!",
-        user: data,
-        jwt_token: token,
-      });
+    response.cookie("accessToken", token, { httpOnly: true }).status(200).send({
+      error: false,
+      message: "Login successful!",
+      user: data,
+      jwt_token: token,
+    });
+    return;
   } catch (error) {
     console.log(error);
-    return response.status(500).send({
+    response.status(500).send({
       error: true,
       message: "Something went wrong!",
     });
+    return;
   }
 };
 
-const authLogout = async (
-  _: Request,
-  response: Response
-): Promise<Response> => {
-  return response
+const authLogout = async (_: Request, response: Response): Promise<void> => {
+  response
     .clearCookie("accessToken", {
       sameSite: "none",
       secure: true,
@@ -140,5 +140,6 @@ const authLogout = async (
       message: "User have been logged out!",
     });
 };
+
 const auth = { authLogin, authLogout, authRegister };
 export default auth;
