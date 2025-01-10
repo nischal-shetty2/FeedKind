@@ -4,6 +4,8 @@ import { Request, Response } from "express";
 import { IItemListing } from "../models/ItemsListing";
 import { CustomRequest } from "../types/CustomeRequest";
 import { error } from "console";
+import { IUser } from "../types/User";
+import User from "../models/User";
 
 const DaysBeforeExpiration = 4;
 
@@ -45,6 +47,25 @@ const addVendorListing = async (
   }
 };
 
+export interface ViewList {
+  user: IUser | unknown;
+  items: {
+    itemName: {
+      type: String;
+      required: true;
+      trim: true;
+    };
+    expirationDate: {
+      type: Date;
+      required: true;
+    };
+    price: {
+      type: Number;
+      required: true;
+    };
+  }[];
+}
+
 const listDiscountedItems = async (
   _: Request,
   res: Response
@@ -55,14 +76,19 @@ const listDiscountedItems = async (
       currentDate.getTime() + DaysBeforeExpiration * 24 * 60 * 60 * 1000
     );
 
-    const listings: IItemListing[] = await ItemListing.find({
+    // Fetch listings and populate vendorId with User details
+    const itemListings: any = await ItemListing.find({
       bulkExpirationDate: { $gte: fourDaysLater },
-    });
+    }).populate("vendorId"); // Populate the vendorId with User data
+
     console.log("Discount Listing:");
-    console.log(listings);
+    // const viewList: any = itemListings.map(async (bulk) => {
+    //   user: await User.find({ _id: bulk.id });
+    // });
+    console.log(itemListings);
     res.status(200).json({
       error: false,
-      listings,
+      listings: itemListings,
     });
   } catch (error) {
     console.error(error);
@@ -82,9 +108,12 @@ const listDonationItems = async (_: Request, res: Response): Promise<void> => {
         $gte: currentDate,
         $lte: new Date(currentDate.getTime() + 4 * 24 * 60 * 60 * 1000),
       },
-    });
+    }).populate("vendorId");
     console.log("Donation Listing:");
-    res.status(200).json(listings);
+    res.status(200).json({
+      error: false,
+      listings,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({
