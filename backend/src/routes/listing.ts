@@ -1,9 +1,11 @@
 import express, { Request, Response } from "express";
 import listing from "../controller/listing.controller";
+import userMiddleware from "../middleware/user.middleware";
 
 const router = express.Router();
 
-// Create listing route
-router.post("/listing/:id", listing.addVendorListing);
+router.get("/listing/discount", userMiddleware, listing.listDiscountedItems);
+
+router.post("/listing/:id", userMiddleware, listing.addVendorListing);
 
 export default router;

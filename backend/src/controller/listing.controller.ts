@@ -36,4 +36,52 @@ const addVendorListing = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export default { addVendorListing };
+const listDiscountedItems = async (
+  _: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const currentDate = new Date();
+
+    const listings: IItemListing[] = await ItemListing.find({
+      bulkExpirationDate: { $gte: currentDate },
+    });
+
+    const filteredListings = listings.map((listing) => ({
+      ...listing.toObject(),
+      items: listing.items.filter(
+        (item) =>
+          new Date(item.expirationDate) < new Date(listing.bulkExpirationDate)
+      ),
+    }));
+
+    res.status(200).json(filteredListings);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Server error, could not fetch listings." });
+  }
+};
+
+const listDonationItems = async (_: Request, res: Response): Promise<void> => {
+  try {
+    const currentDate = new Date();
+
+    const listings: IItemListing[] = await ItemListing.find({
+      bulkExpirationDate: {
+        $gte: currentDate,
+        $lte: new Date(currentDate.getTime() + 4 * 24 * 60 * 60 * 1000),
+      },
+    });
+
+    res.status(200).json(listings);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Server error, could not fetch listings." });
+  }
+};
+
+export default { addVendorListing, listDiscountedItems, listDonationItems };

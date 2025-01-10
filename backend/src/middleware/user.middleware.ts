@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET as string;
 
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Response, NextFunction } from "express";
@@ -20,10 +21,7 @@ const userMiddleware = (
       ? authHeader.split(" ")[1]
       : authHeader;
 
-    const verification = jwt.verify(
-      token,
-      process.env.JWT_SECRET as string
-    ) as JwtPayload;
+    const verification = jwt.verify(token, JWT_SECRET) as JwtPayload;
     if (verification) {
       request.userID = verification._id;
       return next();

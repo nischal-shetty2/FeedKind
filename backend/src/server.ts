@@ -5,6 +5,7 @@ import { connect } from "./db/connect";
 
 const PORT: number = parseInt(process.env.PORT || "8080", 10);
 import authRoute from "./routes/auth";
+import listingRoute from "./routes/listing";
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(
 );
 
 app.use("/auth", authRoute);
-// app.use("/listing", listingRoute);
+app.use("/listing", listingRoute);
 
 app.get("/", (_: Request, response: Response) => {
   response.send("user other route!");
