@@ -88,11 +88,13 @@ const Home = () => {
                 communities across the nation.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-green-600 hover:bg-green-700 transform hover:scale-105 transition-all">
+                <Button
+                  className="bg-green-600 hover:bg-green-700 transform hover:scale-105 transition-all"
+                  onClick={() => (window.location.href = "/login")}>
                   Start Donating Today
                   <ArrowUpRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button className="hover:bg-green-50 transform hover:scale-105 transition-all">
+                <Button className="hover:bg-green-700 transform hover:scale-105 transition-all">
                   Join as Food Bank
                   <Heart className="ml-2 h-4 w-4" />
                 </Button>
