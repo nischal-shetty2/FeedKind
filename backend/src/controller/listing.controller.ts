@@ -2,8 +2,12 @@ import mongoose from "mongoose";
 import ItemListing from "../models/ItemsListing";
 import { Request, Response } from "express";
 import { IItemListing } from "../models/ItemsListing";
+import { CustomRequest } from "../types/CustomeRequest";
 
-const addVendorListing = async (req: Request, res: Response): Promise<void> => {
+const addVendorListing = async (
+  req: CustomRequest,
+  res: Response
+): Promise<void> => {
   try {
     const { id } = req.params;
     const { items, bulkExpirationDate } = req.body;
