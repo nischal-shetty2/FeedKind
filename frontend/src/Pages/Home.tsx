@@ -54,7 +54,7 @@ const CountUpNumber = ({
   return <span>{count.toLocaleString()}</span>;
 };
 
-const HomePage = () => {
+const Home = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -238,4 +238,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
