@@ -18,11 +18,11 @@ const addVendorListing = async (
         .json({ message: "Items and bulkExpirationDate are required." });
       return;
     }
-
+    const bulkExpDate: Date = new Date(bulkExpirationDate);
     const newListing: IItemListing = new ItemListing({
       vendorId: new mongoose.Types.ObjectId(id),
       items,
-      bulkExpirationDate,
+      bulkExpirationDate: bulkExpDate,
     });
 
     const savedListing = await newListing.save();
