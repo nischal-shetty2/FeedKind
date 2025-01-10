@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Building2, Heart, MapPin } from "lucide-react";
 import Map from "./Map";
+import axiosFetch from "../lib/axiosFetch";
 
 interface LocationState {
   lat: number;
@@ -27,7 +28,7 @@ const SignUpPage = () => {
   const [photoUrl, setPhotoUrl] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const userData = {
       name,
@@ -42,7 +43,21 @@ const SignUpPage = () => {
       description: description || undefined,
       registeredAt: new Date(),
     };
-    console.log("Signing up:", userData);
+
+    try {
+      const response = await axiosFetch.post("/auth/register", userData);
+
+      if (response.data.error) {
+        throw new Error(response.data.message);
+      }
+
+      console.log("Registration successful", response.data);
+      // Redirect to login or home page
+      window.location.href = "/discount"; // Update URL as needed
+    } catch (error) {
+      console.error("Error during registration:", error);
+      // Show error message to the user (optional)
+    }
   };
 
   return (
