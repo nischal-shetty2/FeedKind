@@ -97,9 +97,9 @@ const Navbar = () => {
                 </motion.a>
               ))}
               <motion.button
-                className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3.5 rounded-xl text-lg font-medium"
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                whileTap={{ scale: 0.98 }}
+                className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl text-lg font-medium"
+                whileHover={{ scale: 1.05,rotate:0}}
+                whileTap={{ scale: 0.90 }}
                 onClick={() => handleRedirect("/login")}>
                 Get Started
               </motion.button>
