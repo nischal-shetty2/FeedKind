@@ -110,8 +110,8 @@ const Home = () => {
     <div className="min-h-screen bg-green-50">
       {/* Hero Section with Background */}
       <motion.div
-        className="relative overflow-hidden bg-[url('https://t3.ftcdn.net/jpg/09/81/89/20/240_F_981892099_OpfPZeAGOnNuBGSZbXUpIy293s95a8SO.jpg')] bg-cover bg-center bg-no-repeat"
-        initial={{ opacity: 0 }}
+  className="relative overflow-hidden bg-[url('https://wishesandblessings.net/public/images/food_all.jpg')] bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:bg-black/10 before:backdrop-blur-sm"
+  initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >

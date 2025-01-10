@@ -8,7 +8,7 @@ const Navbar = () => {
   const navItems = [
     { name: "View", href: "/listing" },
     { name: "About Us", href: "/about" },
-    { name: "Join", href: "/signup" },
+    { name: "Login", href: "/login" },
   ];
 
   const handleRedirect = (url: string) => {
@@ -57,12 +57,11 @@ const Navbar = () => {
                 </motion.a>
               ))}
               <motion.button
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg text-base font-medium transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleRedirect("/login")} // Redirect to signup
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl text-lg font-medium transition-transform"
+                whileHover={{ scale: 1.08, rotate: 1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleRedirect("/sighup")} // Redirect to signup
               >
-                
                 Get Started
               </motion.button>
             </div>
@@ -103,8 +102,8 @@ const Navbar = () => {
                 </motion.a>
               ))}
               <motion.button
-                className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg text-base font-medium"
-                whileHover={{ scale: 1.02 }}
+                className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3.5 rounded-xl text-lg font-medium"
+                whileHover={{ scale: 1.05, rotate: 2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleRedirect("/login")} 
               >
