@@ -3,6 +3,7 @@ import mongoose, { Schema, Document, model } from "mongoose";
 export interface IItem extends Document {
   itemName: string;
   expirationDate: Date;
+  price: Number;
 }
 
 export interface IItemListing extends Document {
@@ -27,6 +28,10 @@ const itemListingSchema = new Schema<IItemListing>(
         },
         expirationDate: {
           type: Date,
+          required: true,
+        },
+        price: {
+          type: Number,
           required: true,
         },
       },
