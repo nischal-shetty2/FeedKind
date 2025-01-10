@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Building2, Heart } from "lucide-react";
-import Map from "./Map";
 
 const LoginPage = () => {
   const [userType, setUserType] = useState<"vendor" | "foodbank">("vendor");
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [location, setLocation] = useState({ lat: 12.352, lng: 72.2354 });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -124,13 +122,12 @@ const LoginPage = () => {
         <p className="mt-6 text-center text-sm text-gray-600">
           Don't have an account?{" "}
           <a
-            href="#"
+            href="/signup"
             className="text-green-600 hover:text-green-700 font-medium">
             Sign up
           </a>
         </p>
       </div>
-      <Map location={location} setLocation={setLocation} />
     </div>
   );
 };
