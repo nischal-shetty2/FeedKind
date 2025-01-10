@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import ItemListing from "../models/ItemsListing";
 import { Request, Response } from "express";
-import { IItemListing } from "../models/ItemsListing";
+import { IItemListing } from "../types/ItemListing";
 import { CustomRequest } from "../types/CustomeRequest";
 import { IUser } from "../types/User";
 
@@ -64,10 +64,7 @@ export interface ViewList {
   }[];
 }
 
-const listDiscountedItems = async (
-  _: Request,
-  res: Response
-): Promise<void> => {
+const discountedItems = async (_: Request, res: Response): Promise<void> => {
   try {
     const currentDate = new Date();
     const fourDaysLater = new Date(
@@ -93,7 +90,7 @@ const listDiscountedItems = async (
   }
 };
 
-const listDonationItems = async (_: Request, res: Response): Promise<void> => {
+const donationItems = async (_: Request, res: Response): Promise<void> => {
   try {
     const currentDate = new Date();
 
@@ -117,7 +114,7 @@ const listDonationItems = async (_: Request, res: Response): Promise<void> => {
   }
 };
 
-const listExpiredItems = async (_: Request, res: Response): Promise<void> => {
+const expiredItems = async (_: Request, res: Response): Promise<void> => {
   try {
     const currentDate = new Date();
 
@@ -142,7 +139,7 @@ const listExpiredItems = async (_: Request, res: Response): Promise<void> => {
 
 export default {
   addVendorListing,
-  listDiscountedItems,
-  listDonationItems,
-  listExpiredItems,
+  discountedItems,
+  donationItems,
+  expiredItems,
 };

@@ -4,11 +4,11 @@ import userMiddleware from "../middleware/user.middleware";
 
 const router = express.Router();
 
-router.get("/discount", listing.listDiscountedItems);
+router.get("/discount", listing.discountedItems);
 
-router.get("/foodbank", listing.listDonationItems);
+router.get("/foodbank", listing.donationItems);
 
-router.get("/expired", listing.listExpiredItems);
+router.get("/expired", listing.expiredItems);
 
 router.post("/:id", userMiddleware, listing.addVendorListing);
 
