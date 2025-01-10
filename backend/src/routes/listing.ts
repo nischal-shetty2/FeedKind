@@ -4,8 +4,8 @@ import userMiddleware from "../middleware/user.middleware";
 
 const router = express.Router();
 
-router.get("/listing/discount", userMiddleware, listing.listDiscountedItems);
+router.get("/discount", userMiddleware, listing.listDiscountedItems);
 
-router.post("/listing/:id", userMiddleware, listing.addVendorListing);
+router.post("/:id", userMiddleware, listing.addVendorListing);
 
 export default router;
