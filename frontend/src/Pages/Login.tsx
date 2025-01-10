@@ -12,15 +12,17 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axiosFetch.post("/auth/login", {
-          email,
-          password,
+        email,
+        password,
       });
-      const { error, message, jwt_token, userId } = response.data;
+      const { error, message, jwt_token, user } = response.data;
       if (error) {
         throw new Error(message || "An error occurred");
       }
       localStorage.setItem("token", jwt_token);
-      localStorage.setItem("userId", userId);
+      localStorage.setItem("userId", user._id);
+      localStorage.setItem("isDoner", user.isADonor);
+
       window.location.href = "/discount";
     } catch (error) {
       console.error("Error logging in", error);
@@ -39,8 +41,7 @@ const LoginPage = () => {
               userType === "vendor"
                 ? "bg-white text-green-600 shadow-sm ring-1 ring-green-100"
                 : "text-gray-500 hover:text-gray-700 hover:bg-white/50"
-            }`}
-          >
+            }`}>
             <Building2 className="h-4 w-4" />
             <span className="font-medium">Vendor</span>
           </button>
@@ -50,8 +51,7 @@ const LoginPage = () => {
               userType === "foodbank"
                 ? "bg-white text-green-600 shadow-sm ring-1 ring-green-100"
                 : "text-gray-500 hover:text-gray-700 hover:bg-white/50"
-            }`}
-          >
+            }`}>
             <Heart className="h-4 w-4" />
             <span className="font-medium">Food Bank</span>
           </button>
@@ -74,8 +74,7 @@ const LoginPage = () => {
           <div className="space-y-2">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+              className="block text-sm font-medium text-gray-700">
               Email address
             </label>
             <input
@@ -92,8 +91,7 @@ const LoginPage = () => {
           <div className="space-y-2">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+              className="block text-sm font-medium text-gray-700">
               Password
             </label>
             <div className="relative">
@@ -109,8 +107,7 @@ const LoginPage = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600"
-              >
+                className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600">
                 {showPassword ? (
                   <EyeOff className="h-5 w-5" />
                 ) : (
@@ -130,8 +127,7 @@ const LoginPage = () => {
             </label>
             <a
               href="#"
-              className="text-sm text-green-600 hover:text-green-700 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 rounded"
-            >
+              className="text-sm text-green-600 hover:text-green-700 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 rounded">
               Forgot password?
             </a>
           </div>
@@ -148,8 +144,7 @@ const LoginPage = () => {
           Don't have an account?{" "}
           <a
             href="/signup"
-            className="text-green-600 hover:text-green-700 font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 rounded"
-          >
+            className="text-green-600 hover:text-green-700 font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 rounded">
             Sign up now
           </a>
         </p>

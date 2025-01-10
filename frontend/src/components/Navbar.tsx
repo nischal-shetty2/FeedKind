@@ -8,7 +8,7 @@ const Navbar = () => {
   const navItems = [
     { name: "Discounts", href: "/discount" },
     { name: "List item", href: "/postitems" },
-    { name: "About Us", href: "/about" },
+    { name: "Donations", href: "/donations" },
     { name: "Login", href: "/login" },
   ];
 

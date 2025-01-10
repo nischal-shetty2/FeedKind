@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 
 // Discount.tsx
 import { Listing } from "../lib/types";
-import dummy from "../lib/data/itemListing.json";
 import { ListingCard } from "../components/ui/VendorInfo";
+import axiosFetch from "../lib/axiosFetch";
 
 const Discount: React.FC = () => {
   const [listings, setListings] = useState<Listing[]>([]);
@@ -17,18 +17,14 @@ const Discount: React.FC = () => {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("No authentication token found");
 
-        const listingsData: Listing[] = dummy.map((data) => ({
-          vendor: {
-            ...data.vendor,
-            registeredAt: new Date(data.vendor.registeredAt),
-          },
-          items: data.items,
-          bulkExpirationDate: new Date().toISOString(),
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        }));
+        const { data } = await axiosFetch.get("/listing/discount");
 
-        setListings(listingsData);
+        const { listings, error } = data;
+        if (error) {
+          throw new Error("Wrong list");
+        }
+        console.log(listings);
+        setListings(listings);
         setLoading(false);
       } catch (err) {
         console.error("Error fetching listings:", err);

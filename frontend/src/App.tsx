@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 
 import PostItems from "./Pages/PostItems";
 import Discount from "./Pages/Discount";
+import Donations from "./Pages/Donations";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/discount" element={<Discount />} />
+        <Route path="/donations" element={<Donations />} />
         <Route path="/postitems" element={<PostItems />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>

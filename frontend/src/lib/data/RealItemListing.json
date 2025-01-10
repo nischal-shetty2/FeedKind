@@ -1,0 +1,152 @@
+[
+  {
+    "_id": {
+      "$oid": "67814abaa767bb088212e7dd"
+    },
+    "vendorId": {
+      "$oid": "6781402c72f82063fae02d57"
+    },
+    "items": [
+      {
+        "itemName": "Good Day Biscuit",
+        "expirationDate": {
+          "$date": "2025-05-17T18:30:00.000Z"
+        },
+        "price": 10,
+        "_id": {
+          "$oid": "67814abaa767bb088212e7de"
+        }
+      }
+    ],
+    "bulkExpirationDate": {
+      "$date": "2025-01-22T00:00:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2025-01-10T16:28:42.292Z"
+    },
+    "updatedAt": {
+      "$date": "2025-01-10T16:28:42.292Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "67816d791afda0dd110576e2"
+    },
+    "vendorId": {
+      "$oid": "6781402c72f82063fae02d57"
+    },
+    "items": [
+      {
+        "itemName": "Good Day Biscuit",
+        "expirationDate": {
+          "$date": "2025-05-18T00:00:00.000Z"
+        },
+        "price": 10,
+        "_id": {
+          "$oid": "67816d791afda0dd110576e3"
+        }
+      }
+    ],
+    "bulkExpirationDate": {
+      "$date": "2025-01-21T00:00:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2025-01-10T18:56:57.197Z"
+    },
+    "updatedAt": {
+      "$date": "2025-01-10T18:56:57.197Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "67816dbb1afda0dd110576e7"
+    },
+    "vendorId": {
+      "$oid": "6781402c72f82063fae02d57"
+    },
+    "items": [
+      {
+        "itemName": "Good Day Biscuit",
+        "expirationDate": {
+          "$date": "2025-05-18T00:00:00.000Z"
+        },
+        "price": 10,
+        "_id": {
+          "$oid": "67816dbb1afda0dd110576e8"
+        }
+      }
+    ],
+    "bulkExpirationDate": {
+      "$date": "2025-01-21T00:00:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2025-01-10T18:58:03.198Z"
+    },
+    "updatedAt": {
+      "$date": "2025-01-10T18:58:03.198Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "67816dd31afda0dd110576ea"
+    },
+    "vendorId": {
+      "$oid": "6781402c72f82063fae02d57"
+    },
+    "items": [
+      {
+        "itemName": "Good Day Biscuit",
+        "expirationDate": {
+          "$date": "2025-05-18T00:00:00.000Z"
+        },
+        "price": 10,
+        "_id": {
+          "$oid": "67816dd31afda0dd110576eb"
+        }
+      }
+    ],
+    "bulkExpirationDate": {
+      "$date": "2025-01-21T00:00:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2025-01-10T18:58:27.355Z"
+    },
+    "updatedAt": {
+      "$date": "2025-01-10T18:58:27.355Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "67817e9fa48047871c445e23"
+    },
+    "vendorId": {
+      "$oid": "67817a614600f8b54ca4b7e3"
+    },
+    "items": [
+      {
+        "itemName": "Lays",
+        "expirationDate": {
+          "$date": "2025-04-29T00:00:00.000Z"
+        },
+        "price": 10,
+        "_id": {
+          "$oid": "67817e9fa48047871c445e24"
+        }
+      }
+    ],
+    "bulkExpirationDate": {
+      "$date": "2025-01-22T00:00:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2025-01-10T20:10:07.158Z"
+    },
+    "updatedAt": {
+      "$date": "2025-01-10T20:10:07.158Z"
+    },
+    "__v": 0
+  }
+]

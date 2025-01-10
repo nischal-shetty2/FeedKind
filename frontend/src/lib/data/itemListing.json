@@ -1,103 +1,82 @@
 [
   {
-    "vendor": {
-      "_id": "64d4fc3c8a2b1a7b7f8c1234",
-      "name": "Alice Johnson",
-      "address": "123 Main Street, Springfield",
-      "phoneNumber": "1234567890",
-      "password": "password123",
-      "latitude": 37.7749,
-      "longitude": -122.4194,
-      "photoUrl": "https://picsum.photos/200/300/",
-      "isADonor": true,
-      "email": "alice.johnson@example.com",
-      "registeredAt": "2024-12-01T12:00:00.000Z",
-      "donationCount": 5,
-      "description": "A generous vendor providing fresh fruits and vegetables."
-    },
+    "_id": { "$oid": "67814abaa767bb088212e7dd" },
+    "vendorId": { "$oid": "6781402c72f82063fae02d57" },
     "items": [
       {
-        "itemName": "Apples",
-        "expirationDate": "2025-01-15T00:00:00.000Z",
-        "price": 1.5
-      },
-      {
-        "itemName": "Bananas",
-        "expirationDate": "2025-01-12T00:00:00.000Z",
-        "price": 0.75
+        "itemName": "Parle-G Biscuit",
+        "expirationDate": { "$date": "2025-06-10T18:30:00.000Z" },
+        "price": 8,
+        "_id": { "$oid": "67814abaa767bb088212e7de" }
       }
     ],
-    "bulkExpirationDate": "2025-01-15T00:00:00.000Z",
-    "createdAt": "2025-01-10T10:00:00.000Z",
-    "updatedAt": "2025-01-10T10:00:00.000Z"
+    "bulkExpirationDate": { "$date": "2025-01-23T00:00:00.000Z" },
+    "createdAt": { "$date": "2025-01-10T16:28:42.292Z" },
+    "updatedAt": { "$date": "2025-01-10T16:28:42.292Z" },
+    "__v": 0
   },
   {
-    "vendor": {
-      "_id": "64d4fc3c8a2b1a7b7f8c5678",
-      "name": "Bob Smith",
-      "address": "456 Elm Street, Metropolis",
-      "phoneNumber": "9876543210",
-      "password": "securepassword",
-      "latitude": 40.7128,
-      "longitude": -74.006,
-      "photoUrl": "https://picsum.photos/200/300/",
-      "isADonor": true,
-      "email": "bob.smith@example.com",
-      "registeredAt": "2024-11-20T08:30:00.000Z",
-      "donationCount": 0,
-      "description": "Specializes in dairy products with a commitment to quality."
-    },
+    "_id": { "$oid": "67816d791afda0dd110576e2" },
+    "vendorId": { "$oid": "6781402c72f82063fae02d57" },
     "items": [
       {
-        "itemName": "Milkkk",
-        "expirationDate": "2025-01-11T00:00:00.000Z",
-        "price": 2.0
-      },
-      {
-        "itemName": "Milk",
-        "expirationDate": "2025-01-11T00:00:00.000Z",
-        "price": 2.0
-      },
-      {
-        "itemName": "Cheese",
-        "expirationDate": "2025-02-01T00:00:00.000Z",
-        "price": 4.5
+        "itemName": "Marie Gold Biscuit",
+        "expirationDate": { "$date": "2025-05-20T00:00:00.000Z" },
+        "price": 12,
+        "_id": { "$oid": "67816d791afda0dd110576e3" }
       }
     ],
-    "bulkExpirationDate": "2025-02-01T00:00:00.000Z",
-    "createdAt": "2025-01-10T10:05:00.000Z",
-    "updatedAt": "2025-01-10T10:05:00.000Z"
+    "bulkExpirationDate": { "$date": "2025-01-21T00:00:00.000Z" },
+    "createdAt": { "$date": "2025-01-10T18:56:57.197Z" },
+    "updatedAt": { "$date": "2025-01-10T18:56:57.197Z" },
+    "__v": 0
   },
   {
-    "vendor": {
-      "_id": "64d4fc3c8a2b1a7b7f8c9012",
-      "name": "Carol Davis",
-      "address": "789 Oak Avenue, Star City",
-      "phoneNumber": "1230984567",
-      "password": "mypassword",
-      "latitude": 34.0522,
-      "longitude": -118.2437,
-      "photoUrl": "https://picsum.photos/200/300/",
-      "isADonor": true,
-      "email": "carol.davis@example.com",
-      "registeredAt": "2024-12-15T15:45:00.000Z",
-      "donationCount": 10,
-      "description": "An experienced baker providing freshly baked goods daily."
-    },
+    "_id": { "$oid": "67816dbb1afda0dd110576e7" },
+    "vendorId": { "$oid": "6781402c72f82063fae02d57" },
     "items": [
       {
-        "itemName": "Bread",
-        "expirationDate": "2025-01-18T00:00:00.000Z",
-        "price": 1.25
-      },
-      {
-        "itemName": "Butter",
-        "expirationDate": "2025-02-10T00:00:00.000Z",
-        "price": 3.0
+        "itemName": "Hide & Seek Cookies",
+        "expirationDate": { "$date": "2025-06-01T00:00:00.000Z" },
+        "price": 15,
+        "_id": { "$oid": "67816dbb1afda0dd110576e8" }
       }
     ],
-    "bulkExpirationDate": "2025-02-10T00:00:00.000Z",
-    "createdAt": "2025-01-10T10:10:00.000Z",
-    "updatedAt": "2025-01-10T10:10:00.000Z"
+    "bulkExpirationDate": { "$date": "2025-01-25T00:00:00.000Z" },
+    "createdAt": { "$date": "2025-01-10T18:58:03.198Z" },
+    "updatedAt": { "$date": "2025-01-10T18:58:03.198Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "67816dd31afda0dd110576ea" },
+    "vendorId": { "$oid": "6781402c72f82063fae02d57" },
+    "items": [
+      {
+        "itemName": "Bourbon Biscuits",
+        "expirationDate": { "$date": "2025-05-25T00:00:00.000Z" },
+        "price": 14,
+        "_id": { "$oid": "67816dd31afda0dd110576eb" }
+      }
+    ],
+    "bulkExpirationDate": { "$date": "2025-01-22T00:00:00.000Z" },
+    "createdAt": { "$date": "2025-01-10T18:58:27.355Z" },
+    "updatedAt": { "$date": "2025-01-10T18:58:27.355Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "67817e9fa48047871c445e23" },
+    "vendorId": { "$oid": "67817a614600f8b54ca4b7e3" },
+    "items": [
+      {
+        "itemName": "KurKure",
+        "expirationDate": { "$date": "2025-05-10T00:00:00.000Z" },
+        "price": 20,
+        "_id": { "$oid": "67817e9fa48047871c445e24" }
+      }
+    ],
+    "bulkExpirationDate": { "$date": "2025-01-25T00:00:00.000Z" },
+    "createdAt": { "$date": "2025-01-10T20:10:07.158Z" },
+    "updatedAt": { "$date": "2025-01-10T20:10:07.158Z" },
+    "__v": 0
   }
 ]

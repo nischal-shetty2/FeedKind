@@ -21,7 +21,7 @@ export interface Item {
 }
 
 export interface Listing {
-  vendor: Vendor;
+  vendorId: Vendor;
   items: Item[];
   bulkExpirationDate: string;
   createdAt: string;
