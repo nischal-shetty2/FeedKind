@@ -112,7 +112,7 @@ const authLogin = async (
       { expiresIn: "7d" }
     );
 
-    response.cookie("accessToken", token, { httpOnly: true }).status(200).send({
+    response.status(200).send({
       error: false,
       message: "Login successful!",
       user: data,
@@ -130,15 +130,10 @@ const authLogin = async (
 };
 
 const authLogout = async (_: Request, response: Response): Promise<void> => {
-  response
-    .clearCookie("accessToken", {
-      sameSite: "none",
-      secure: true,
-    })
-    .send({
-      error: false,
-      message: "User have been logged out!",
-    });
+  response.send({
+    error: false,
+    message: "User have been logged out!",
+  });
 };
 
 const auth = { authLogin, authLogout, authRegister };
