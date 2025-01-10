@@ -11,7 +11,7 @@ const { JWT_SECRET, NODE_ENV } = process.env;
 const saltRounds = 10;
 
 const authRegister = async (
-  request: Request,
+  request: Request<{}, {}, IUser>,
   response: Response
 ): Promise<Response> => {
   const {
@@ -24,12 +24,12 @@ const authRegister = async (
     description,
     latitude,
     longitude,
-  } = request.body as IUser;
+  } = request.body;
   console.log(request.body);
 
   try {
     const hash =
-      NODE_ENV === "development"
+      process.env.NODE_ENV === "development"
         ? password
         : await bcrypt.hash(password, saltRounds);
 
@@ -53,7 +53,7 @@ const authRegister = async (
         _id: user._id,
         email: user.email,
       },
-      JWT_SECRET!,
+      process.env.JWT_SECRET!,
       { expiresIn: "7d" }
     );
 
@@ -62,8 +62,8 @@ const authRegister = async (
       message: "New user created!",
       jwt_token: token,
     });
-  } catch (message) {
-    console.log(message);
+  } catch (error) {
+    console.log(error);
     return response.status(500).send({
       error: true,
       message: "Something went wrong!",
@@ -140,5 +140,5 @@ const authLogout = async (
       message: "User have been logged out!",
     });
 };
-
-export { authLogin, authLogout, authRegister };
+const auth = { authLogin, authLogout, authRegister };
+export default auth;
