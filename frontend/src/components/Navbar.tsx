@@ -5,11 +5,13 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const isDonor = localStorage.getItem("isDonor");
+  const isLoggedin = !!localStorage.getItem("token");
   const navItems = [
     { name: "Discounts", href: "/discount" },
     { name: "List item", href: "/postitems" },
-    { name: "Donations", href: "/donations" },
-    { name: "Login", href: "/login" },
+    ...(isDonor ? [] : [{ name: "Donations", href: "/donations" }]),
+    ...(isLoggedin ? [] : [{ name: "Login", href: "/login" }]),
   ];
 
   const handleRedirect = (url: string) => {
@@ -54,14 +56,16 @@ const Navbar = () => {
                   {item.name}
                 </motion.a>
               ))}
-              <motion.button
-                className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl text-lg font-medium transition-transform"
-                whileHover={{ scale: 1.08, rotate: 1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleRedirect("/signup")} // Redirect to signup
-              >
-                Get Started
-              </motion.button>
+              {!isLoggedin && (
+                <motion.button
+                  className="bg-green-600 hover:bg-green-700 duration-100 text-white px-8 py-3 rounded-xl text-lg font-medium transition-transform"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => handleRedirect("/signup")} // Redirect to signup
+                >
+                  Get Started
+                </motion.button>
+              )}
             </div>
 
             {/* Mobile Menu Button */}

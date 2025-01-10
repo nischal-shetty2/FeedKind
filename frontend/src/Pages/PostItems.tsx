@@ -224,6 +224,7 @@ const PostItems: React.FC = () => {
       console.error("Error posting items:", error);
     }
   };
+  const offset = 5.5 * 60 * 60 * 1000;
 
   if (!token || !userId) {
     window.location.href = "/signup";
@@ -338,8 +339,10 @@ const PostItems: React.FC = () => {
               <input
                 type="date"
                 value={bulkExpirationDate}
-                onChange={(e) => setBulkExpirationDate(e.target.value)}
-                min={new Date().toISOString().split("T")[0]}
+                onChange={(e) => {
+                  setBulkExpirationDate(e.target.value);
+                }}
+                min={new Date(Date.now() + offset).toISOString().split("T")[0]}
                 max={earliestExpiry}
                 className="w-full px-4 py-2 border rounded-lg"
               />

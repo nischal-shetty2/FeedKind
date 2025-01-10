@@ -21,7 +21,7 @@ const LoginPage = () => {
       }
       localStorage.setItem("token", jwt_token);
       localStorage.setItem("userId", user._id);
-      localStorage.setItem("isDoner", user.isADonor);
+      localStorage.setItem("isDonor", user.isADonor);
 
       window.location.href = "/discount";
     } catch (error) {

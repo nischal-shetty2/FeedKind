@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Listing } from "../lib/types";
-import axios from "axios";
 import { ListingCard } from "../components/ui/VendorInfo";
+import axiosFetch from "../lib/axiosFetch";
 
 type DonationType = "foodbank" | "expired";
 
@@ -53,13 +53,14 @@ const Donations: React.FC = () => {
             ? "/listing/foodbank"
             : "/listing/expired";
 
-        const response = await axios.get<Listing[]>(endpoint, {
+        const { data } = await axiosFetch.get(endpoint, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log(data);
 
-        setListings(response.data);
+        setListings(data.listings);
       } catch (err) {
         console.error("Error fetching listings:", err);
         setError(
@@ -71,7 +72,7 @@ const Donations: React.FC = () => {
     };
 
     fetchListings();
-  }, [donationType]); // Refetch when donation type changes
+  }, [donationType]);
 
   const handleToggle = (type: DonationType) => {
     setDonationType(type);
