@@ -62,6 +62,7 @@ const Navbar = () => {
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleRedirect("/login")} // Redirect to signup
               >
+                
                 Get Started
               </motion.button>
             </div>

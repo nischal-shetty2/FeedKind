@@ -94,68 +94,64 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section with enhanced animations */}
-      <motion.div
-        className="relative overflow-hidden bg-gradient-to-r from-green-50 via-emerald-50 to-green-50"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        <div className="container mx-auto px-4 py-20 relative">
+    <div className="min-h-screen bg-green-50">
+    {/* Hero Section with Background Image */}
+    <motion.div
+      className="relative overflow-hidden bg-[url('https://t3.ftcdn.net/jpg/09/81/89/20/240_F_981892099_OpfPZeAGOnNuBGSZbXUpIy293s95a8SO.jpg')] bg-cover bg-center bg-no-repeat"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      {/* Semi-transparent overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-olive-900/70 via-olive-800/60 to-olive-700/50" />
+      
+      <div className="container mx-auto px-4 py-20 relative">
+        <motion.div
+          className="max-w-3xl"
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Transform Surplus into
+            <span className="text-ener-600"> Hope</span>
+          </h1>
+          <p className="text-xl text-gray-100 mb-8 leading-relaxed">
+            Join our mission to reduce food waste and fight hunger. We connect
+            food donors with food banks, making a real difference in
+            communities across the nation.
+          </p>
           <motion.div
-            className="max-w-3xl"
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Transform Surplus into
-              <motion.span
-                className="text-green-600"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                {" "}
-                Hope
-              </motion.span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Join our mission to reduce food waste and fight hunger. We connect
-              food donors with food banks, making a real difference in
-              communities across the nation.
-            </p>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
+            <motion.button
+              className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center justify-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => (window.location.href = "/signup")}
             >
-              <motion.button
-                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center justify-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => (window.location.href = "/signup")}
-              >
-                Start Donating Today
-                <ArrowUpRight className="ml-2 h-4 w-4" />
-              </motion.button>
-              <motion.button
-                className="px-6 py-3 bg-white text-green-600 border border-green-600 rounded-lg hover:bg-green-50 flex items-center justify-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => (window.location.href = "/signup")}
-              >
-                Join as Food Bank
-                <Heart className="ml-2 h-4 w-4" />
-              </motion.button>
-            </motion.div>
+              Start Donating Today
+              <ArrowUpRight className="ml-2 h-4 w-4" />
+            </motion.button>
+            <motion.button
+              className="px-6 py-3 bg-white text-green-600 border border-green-600 rounded-lg hover:bg-green-50 flex items-center justify-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => (window.location.href = "/signup")}
+            >
+              Join as Food Bank
+              <Heart className="ml-2 h-4 w-4" />
+            </motion.button>
           </motion.div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
+    </motion.div>
 
-      {/* Stats Section with Stagger Animation */}
+
+      {/* Stats Section */}
       <motion.div
         className="bg-white py-16 -mt-8"
         variants={containerVariants}
@@ -187,13 +183,9 @@ const Home = () => {
                 whileHover={{ scale: 1.05 }}
                 className="bg-white p-6 rounded-xl shadow-lg"
               >
-                <motion.div
-                  className="flex items-center justify-center mb-4"
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 2, delay: index * 0.2 }}
-                >
+                <div className="flex items-center justify-center mb-4">
                   {stat.icon}
-                </motion.div>
+                </div>
                 <div className="text-4xl font-bold text-green-600 mb-2 text-center">
                   <CountUpNumber end={stat.number} inView={isVisible} />+
                 </div>
@@ -204,7 +196,7 @@ const Home = () => {
         </div>
       </motion.div>
 
-      {/* Impact Graph Section with Animation */}
+      {/* Impact Graph Section */}
       <motion.div
         className="bg-white py-16"
         initial={{ opacity: 0, y: 50 }}
@@ -235,35 +227,11 @@ const Home = () => {
         </div>
       </motion.div>
 
-      {/* Search Section with Enhanced Animation */}
-      <motion.div
-        className="container mx-auto px-4 py-12"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <motion.div
-          className="max-w-2xl mx-auto"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <div className="relative">
-            <motion.input
-              type="text"
-              placeholder="Search for available food donations in your area..."
-              className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-lg"
-              initial={{ width: "80%" }}
-              whileFocus={{ width: "100%" }}
-              transition={{ duration: 0.3 }}
-            />
-            <Search className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
-          </div>
-        </motion.div>
-      </motion.div>
+      
 
-      {/* How It Works Section with Enhanced Animations */}
+      {/* How It Works Section */}
       <motion.div
-        className="bg-gray-50 py-16"
+        className="bg-green-50 py-16"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -301,17 +269,7 @@ const Home = () => {
                 }}
                 className="bg-white p-6 rounded-xl shadow-lg"
               >
-                <motion.div
-                  className="flex justify-center mb-4"
-                  animate={{ rotateY: [0, 360] }}
-                  transition={{
-                    duration: 2,
-                    delay: index * 0.3,
-                    repeat: Infinity,
-                  }}
-                >
-                  {item.icon}
-                </motion.div>
+                <div className="flex justify-center mb-4">{item.icon}</div>
                 <h3 className="text-xl font-semibold mb-2 text-center">
                   {item.title}
                 </h3>
@@ -322,9 +280,9 @@ const Home = () => {
         </div>
       </motion.div>
 
-      {/* CTA Section with Enhanced Animation */}
+      {/* CTA Section */}
       <motion.div
-        className="bg-gradient-to-r from-green-600 to-emerald-600 py-16"
+        className="bg-gradient-to-r from-green-600 to-green-800 py-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -343,7 +301,7 @@ const Home = () => {
             together to reduce waste and fight hunger.
           </p>
           <motion.button
-            className="px-6 py-3 bg-white text-green-600 rounded-lg hover:bg-green-50 flex items-center justify-center mx-auto"
+            className="px-6 py-3 bg-white text-green-700 rounded-lg hover:bg-green-50 flex items-center justify-center mx-auto"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
