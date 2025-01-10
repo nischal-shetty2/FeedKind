@@ -6,8 +6,9 @@ import Login from "./Pages/Login";
 import SignUpPage from "./Pages/Signup";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { Discount } from "./Pages/Discount";
+
 import PostItems from "./Pages/PostItems";
+import Discount from "./Pages/Discount";
 
 const App: React.FC = () => {
   return (

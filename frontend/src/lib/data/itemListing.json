@@ -1,5 +1,6 @@
 [
-    {
+  {
+    "vendor": {
       "_id": "64d4fc3c8a2b1a7b7f8c1234",
       "name": "Alice Johnson",
       "address": "123 Main Street, Springfield",
@@ -14,22 +15,61 @@
       "donationCount": 5,
       "description": "A generous vendor providing fresh fruits and vegetables."
     },
-    {
+    "items": [
+      {
+        "itemName": "Apples",
+        "expirationDate": "2025-01-15T00:00:00.000Z",
+        "price": 1.5
+      },
+      {
+        "itemName": "Bananas",
+        "expirationDate": "2025-01-12T00:00:00.000Z",
+        "price": 0.75
+      }
+    ],
+    "bulkExpirationDate": "2025-01-15T00:00:00.000Z",
+    "createdAt": "2025-01-10T10:00:00.000Z",
+    "updatedAt": "2025-01-10T10:00:00.000Z"
+  },
+  {
+    "vendor": {
       "_id": "64d4fc3c8a2b1a7b7f8c5678",
       "name": "Bob Smith",
       "address": "456 Elm Street, Metropolis",
       "phoneNumber": "9876543210",
       "password": "securepassword",
       "latitude": 40.7128,
-      "longitude": -74.0060,
+      "longitude": -74.006,
       "photoUrl": "https://picsum.photos/200/300/",
-      "isADonor": false,
+      "isADonor": true,
       "email": "bob.smith@example.com",
       "registeredAt": "2024-11-20T08:30:00.000Z",
       "donationCount": 0,
       "description": "Specializes in dairy products with a commitment to quality."
     },
-    {
+    "items": [
+      {
+        "itemName": "Milkkk",
+        "expirationDate": "2025-01-11T00:00:00.000Z",
+        "price": 2.0
+      },
+      {
+        "itemName": "Milkkk",
+        "expirationDate": "2025-01-11T00:00:00.000Z",
+        "price": 2.0
+      },
+      {
+        "itemName": "Cheese",
+        "expirationDate": "2025-02-01T00:00:00.000Z",
+        "price": 4.5
+      }
+    ],
+    "bulkExpirationDate": "2025-02-01T00:00:00.000Z",
+    "createdAt": "2025-01-10T10:05:00.000Z",
+    "updatedAt": "2025-01-10T10:05:00.000Z"
+  },
+  {
+    "vendor": {
       "_id": "64d4fc3c8a2b1a7b7f8c9012",
       "name": "Carol Davis",
       "address": "789 Oak Avenue, Star City",
@@ -43,6 +83,21 @@
       "registeredAt": "2024-12-15T15:45:00.000Z",
       "donationCount": 10,
       "description": "An experienced baker providing freshly baked goods daily."
-    }
-  ]
-  
+    },
+    "items": [
+      {
+        "itemName": "Bread",
+        "expirationDate": "2025-01-18T00:00:00.000Z",
+        "price": 1.25
+      },
+      {
+        "itemName": "Butter",
+        "expirationDate": "2025-02-10T00:00:00.000Z",
+        "price": 3.0
+      }
+    ],
+    "bulkExpirationDate": "2025-02-10T00:00:00.000Z",
+    "createdAt": "2025-01-10T10:10:00.000Z",
+    "updatedAt": "2025-01-10T10:10:00.000Z"
+  }
+]

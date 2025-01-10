@@ -22,64 +22,64 @@ const productDatabase: Product[] = [
   {
     barcode: "8906090574372",
     product_name: "Too Yumm Boot Chips",
-    manufacture_date: "2024/11/23",
-    expire_date: "2025/03/22",
+    manufacture_date: "2024-11-23",
+    expire_date: "2025-03-22",
     price: 10,
   },
   {
     barcode: "8901491502030",
     product_name: "Lays",
-    manufacture_date: "2024/12/30",
-    expire_date: "2025/04/29",
+    manufacture_date: "2024-12-30",
+    expire_date: "2025-04-29",
     price: 10,
   },
   {
     barcode: "8901063092730",
     product_name: "good day cashew",
-    manufacture_date: "2024/12/30",
-    expire_date: "2025/04/29",
+    manufacture_date: "2024-12-30",
+    expire_date: "2025-04-29",
     price: 10,
   },
   {
     barcode: "7622202398698",
     product_name: "Dairy Milk",
-    manufacture_date: "2024/10/01",
-    expire_date: "2025/10/31",
+    manufacture_date: "2024-10-01",
+    expire_date: "2025-10-31",
     price: 20,
   },
   {
     barcode: "8901063092747",
     product_name: "Good Day Biscuit",
-    manufacture_date: "2024/11/18",
-    expire_date: "2025/05/18",
+    manufacture_date: "2024-11-18",
+    expire_date: "2025-05-18",
     price: 10,
   },
   {
     barcode: "8901491990219",
     product_name: "Doritos",
-    manufacture_date: "2024/11/07",
-    expire_date: "2025/04/21",
+    manufacture_date: "2024-11-07",
+    expire_date: "2025-04-21",
     price: 10,
   },
   {
     barcode: "8901063092730",
     product_name: "Good Day Cookies",
-    manufacture_date: "2024/12/21",
-    expire_date: "2025/05/20",
+    manufacture_date: "2024-12-21",
+    expire_date: "2025-05-20",
     price: 10,
   },
   {
     barcode: "8901123001214",
     product_name: "Lotte Choco Pie",
-    manufacture_date: "2024/11/20",
-    expire_date: "2025/11/19",
+    manufacture_date: "2024-11-20",
+    expire_date: "2025-11-19",
     price: 10,
   },
   {
     barcode: "8901491103329",
     product_name: "Kurkure",
-    manufacture_date: "2024/12/07",
-    expire_date: "2025/04/06",
+    manufacture_date: "2024-12-07",
+    expire_date: "2025-04-06",
     price: 10,
   },
 ];
@@ -190,8 +190,8 @@ const PostItems: React.FC = () => {
 
     const payload = {
       items: scannedItems.map((item) => ({
-        name: item.product_name,
-        expireDate: item.expire_date,
+        itemName: item.product_name,
+        expirationDate: item.expire_date,
         price: item.price,
       })),
       bulkExpirationDate: bulkExpirationDate || earliestExpiry,
@@ -202,7 +202,7 @@ const PostItems: React.FC = () => {
       const response = await axiosFetch.post(
         `/listing/${vendorId}`,
         {
-          payload,
+          ...payload,
         },
         {
           headers: {
@@ -218,7 +218,8 @@ const PostItems: React.FC = () => {
         setBulkExpirationDate("");
         throw new Error("failed to post");
       }
-      window.location.href = "/discounts";
+      console.log;
+      window.location.href = "/discount";
     } catch (error) {
       console.error("Error posting items:", error);
     }
