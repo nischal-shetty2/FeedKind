@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Building2, Heart, MapPin } from "lucide-react";
 import Map from "./Map";
+import axiosFetch from "../lib/axiosFetch";
 
 interface LocationState {
   lat: number;
@@ -27,7 +28,7 @@ const SignUpPage = () => {
   const [photoUrl, setPhotoUrl] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const userData = {
       name,
@@ -42,7 +43,24 @@ const SignUpPage = () => {
       description: description || undefined,
       registeredAt: new Date(),
     };
-    console.log("Signing up:", userData);
+
+    try {
+      const response = await axiosFetch.post("/auth/register", userData);
+      const { error, message, jwt_token, userId } = response.data;
+
+      if (error) {
+        throw new Error(message);
+      }
+
+      console.log("Registration successful", response.data);
+
+      localStorage.setItem("token", jwt_token);
+      localStorage.setItem("userId", userId);
+
+      window.location.href = "/discount";
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
   };
 
   return (
@@ -76,7 +94,9 @@ const SignUpPage = () => {
 
           {/* Title */}
           <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-900">Create your account</h1>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Create your account
+            </h1>
             <p className="text-gray-600 mt-2 text-lg">
               {userType === "vendor"
                 ? "Join as a food vendor to start donating"
@@ -89,7 +109,9 @@ const SignUpPage = () => {
             {/* Required Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Name</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Name
+                </label>
                 <input
                   type="text"
                   value={name}
@@ -100,7 +122,9 @@ const SignUpPage = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Email</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
                 <input
                   type="email"
                   value={email}
@@ -111,7 +135,9 @@ const SignUpPage = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Phone Number
+                </label>
                 <input
                   type="tel"
                   value={phoneNumber}
@@ -122,7 +148,9 @@ const SignUpPage = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Password</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -147,7 +175,9 @@ const SignUpPage = () => {
 
             {/* Location Section */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Address</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Address
+              </label>
               <textarea
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -168,8 +198,12 @@ const SignUpPage = () => {
             {showMap && (
               <div className="flex-1 bg-white rounded-xl shadow-lg overflow-hidden mt-6">
                 <div className="p-6 bg-gray-50 border-b">
-                  <h3 className="text-lg font-medium text-gray-900">Select Your Location</h3>
-                  <p className="text-sm text-gray-600">Click on the map to set your location</p>
+                  <h3 className="text-lg font-medium text-gray-900">
+                    Select Your Location
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Click on the map to set your location
+                  </p>
                 </div>
                 <div className="h-[400px]">
                   <Map location={location} setLocation={setLocation} />
@@ -179,10 +213,14 @@ const SignUpPage = () => {
 
             {/* Optional Fields */}
             <div className="space-y-6 border-t pt-6">
-              <h3 className="text-lg font-medium text-gray-900">Additional Information</h3>
+              <h3 className="text-lg font-medium text-gray-900">
+                Additional Information
+              </h3>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Profile Photo URL</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Profile Photo URL
+                </label>
                 <input
                   type="url"
                   value={photoUrl}
@@ -193,7 +231,9 @@ const SignUpPage = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Description</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Description
+                </label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}

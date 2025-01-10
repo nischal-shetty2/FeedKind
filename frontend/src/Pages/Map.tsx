@@ -28,12 +28,6 @@ function LocationSelector({
 function Map({ location, setLocation }: any) {
   return (
     <div>
-      <h1>FoodKind</h1>
-      <div>
-        <p>
-          {/* Selected Location: Latitude {location.lat}, Longitude {location.lng} */}
-        </p>
-      </div>
       <MapContainer
         className=" min-w-[500px]"
         center={[location.lat, location.lng] as LatLngExpression}

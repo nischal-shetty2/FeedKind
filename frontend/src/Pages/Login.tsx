@@ -15,19 +15,13 @@ const LoginPage = () => {
         email,
         password,
       });
-
-      // Verify response structure and handle appropriately
-      const { error, message, jwt_token } = response.data;
-
+      const { error, message, jwt_token, userId } = response.data;
       if (error) {
         throw new Error(message || "An error occurred");
       }
-
-      // Store the token in localStorage
-      localStorage.setItem("vToken", jwt_token);
-
-      // Redirect to the home page using React Router if applicable
-      window.location.href = "/"; // Or use `navigate("/")` if using react-router
+      localStorage.setItem("token", jwt_token);
+      localStorage.setItem("userId", userId);
+      window.location.href = "/discount";
     } catch (error) {
       console.error("Error logging in", error);
       // Optionally show a toast or an error message to the user

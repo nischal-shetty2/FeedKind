@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import { Trash2, Plus } from "lucide-react";
+import axiosFetch from "../lib/axiosFetch";
 
 interface Product {
   barcode: string;
   product_name: string;
   manufacture_date: string;
   expire_date: string;
+  price: number;
 }
 
 interface ScannedItem {
@@ -21,28 +23,60 @@ const productDatabase: Product[] = [
     product_name: "Too Yumm Boot Chips",
     manufacture_date: "23/11/2024",
     expire_date: "22/03/2025",
+    price: 10,
   },
   {
     barcode: "8901491502030",
     product_name: "Lays",
     manufacture_date: "30/12/2024",
     expire_date: "29/04/2025",
+    price: 10,
   },
   {
     barcode: "7622202398698",
     product_name: "Dairy Milk",
     manufacture_date: "01/10/2024",
     expire_date: "31/10/2025",
+    price: 20,
   },
   {
     barcode: "8901063092747",
     product_name: "Good Day Biscuit",
     manufacture_date: "18/11/2024",
     expire_date: "18/05/2025",
+    price: 10,
+  },
+  {
+    barcode: "8901491990219",
+    product_name: "Doritos",
+    manufacture_date: "07/11/2024",
+    expire_date: "21/04/2025",
+    price: 10,
+  },
+  {
+    barcode: "8901063092730",
+    product_name: "Good Day Cookies",
+    manufacture_date: "21/12/2024",
+    expire_date: "20/05/2025",
+    price: 10,
+  },
+  {
+    barcode: "8901123001214",
+    product_name: "Lotte Choco Pie",
+    manufacture_date: "20/11/2024",
+    expire_date: "19/11/2025",
+    price: 10,
+  },
+  {
+    barcode: "8901491103329",
+    product_name: "Kurkure",
+    manufacture_date: "07/12/2024",
+    expire_date: "06/04/2025",
+    price: 10,
   },
 ];
 
-const PostItemsPage: React.FC = () => {
+const PostItems: React.FC = () => {
   const scannerRef = useRef<HTMLVideoElement>(null);
   const [scannedItems, setScannedItems] = useState<ScannedItem[]>([]);
   const [bulkExpiryDate, setBulkExpiryDate] = useState<string>("");
@@ -52,16 +86,20 @@ const PostItemsPage: React.FC = () => {
     expire_date: "",
     manufacture_date: "",
   });
+  const [earliestExpiry, setEarliestExpiry] = useState<string>("");
 
-  // Find earliest expiry date among all items
-  const earliestExpiry =
-    scannedItems.length > 0
-      ? scannedItems.reduce(
-          (earliest, item) =>
-            item.expire_date < earliest ? item.expire_date : earliest,
-          scannedItems[0].expire_date
-        )
-      : "";
+  useEffect(() => {
+    if (scannedItems.length > 0) {
+      const earliest = scannedItems.reduce(
+        (earliest, item) =>
+          item.expire_date < earliest ? item.expire_date : earliest,
+        scannedItems[0].expire_date
+      );
+      setEarliestExpiry(earliest);
+    } else {
+      setEarliestExpiry("");
+    }
+  }, [scannedItems]);
 
   useEffect(() => {
     if (scannerRef.current) {
@@ -133,7 +171,7 @@ const PostItemsPage: React.FC = () => {
   const handlePost = async () => {
     if (scannedItems.length === 0) return;
 
-    const vendorId = localStorage.getItem("vendorId");
+    const vendorId = localStorage.getItem("userId");
     if (!vendorId) return;
 
     const payload = {
@@ -145,18 +183,18 @@ const PostItemsPage: React.FC = () => {
     };
 
     try {
-      const response = await fetch(`/listing/${vendorId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+      const response = await axiosFetch.post(`/listing/${vendorId}`, {
+        payload,
       });
 
-      if (response.ok) {
+      const { error } = response.data;
+
+      if (error) {
         setScannedItems([]);
         setBulkExpiryDate("");
+        throw new Error("failed to post");
       }
+      window.location.href = "/discounts";
     } catch (error) {
       console.error("Error posting items:", error);
     }
@@ -193,6 +231,26 @@ const PostItemsPage: React.FC = () => {
                 }
                 className="w-full px-4 py-2 border rounded-lg"
               />
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Manufacture Date
+              </label>
+              <input
+                name="mfd"
+                type="date"
+                placeholder="Manufacture Date (Optional)"
+                value={manualItem.manufacture_date}
+                onChange={(e) =>
+                  setManualItem((prev) => ({
+                    ...prev,
+                    manufacture_date: e.target.value,
+                  }))
+                }
+                className="w-full px-4 py-2 border rounded-lg"
+              />
+
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Expiry Date
+              </label>
               <input
                 type="date"
                 placeholder="Expiry Date"
@@ -205,18 +263,7 @@ const PostItemsPage: React.FC = () => {
                 }
                 className="w-full px-4 py-2 border rounded-lg"
               />
-              <input
-                type="date"
-                placeholder="Manufacture Date (Optional)"
-                value={manualItem.manufacture_date}
-                onChange={(e) =>
-                  setManualItem((prev) => ({
-                    ...prev,
-                    manufacture_date: e.target.value,
-                  }))
-                }
-                className="w-full px-4 py-2 border rounded-lg"
-              />
+
               <button
                 onClick={handleManualAdd}
                 className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
@@ -282,4 +329,4 @@ const PostItemsPage: React.FC = () => {
   );
 };
 
-export default PostItemsPage;
+export default PostItems;
