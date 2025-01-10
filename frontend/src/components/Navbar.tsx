@@ -32,7 +32,7 @@ const Navbar = () => {
                 className="flex items-center space-x-3"
                 whileHover={{ scale: 1.02 }}>
                 <img
-                  src="/public/logo.png"
+                  src="/logo.png"
                   alt="Logo"
                   className="h-12 w-12 rounded-lg"
                 />
@@ -58,7 +58,7 @@ const Navbar = () => {
                 className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl text-lg font-medium transition-transform"
                 whileHover={{ scale: 1.08, rotate: 1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => handleRedirect("/sighup")} // Redirect to signup
+                onClick={() => handleRedirect("/signup")} // Redirect to signup
               >
                 Get Started
               </motion.button>
@@ -98,8 +98,8 @@ const Navbar = () => {
               ))}
               <motion.button
                 className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl text-lg font-medium"
-                whileHover={{ scale: 1.05,rotate:0}}
-                whileTap={{ scale: 0.90 }}
+                whileHover={{ scale: 1.05, rotate: 0 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={() => handleRedirect("/login")}>
                 Get Started
               </motion.button>
