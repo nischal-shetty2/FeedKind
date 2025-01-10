@@ -9,8 +9,8 @@ const Navbar = () => {
   const isLoggedin = !!localStorage.getItem("token");
   const navItems = [
     { name: "Discounts", href: "/discount" },
-    { name: "List item", href: "/postitems" },
     ...(isDonor ? [] : [{ name: "Donations", href: "/donations" }]),
+    ...(!isDonor ? [] : [{ name: "List item", href: "/postitems" }]),
     ...(isLoggedin ? [] : [{ name: "Login", href: "/login" }]),
   ];
 

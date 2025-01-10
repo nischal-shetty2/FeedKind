@@ -28,12 +28,18 @@ import { Modal } from "./Modal";
 import { Listing, Vendor } from "../../lib/types";
 import { Card, CardContent, CardHeader } from "./Card";
 import { ItemList } from "../ItemList";
+import { DonationType } from "../../Pages/Donations";
 interface ListingCardProps {
   listing: Listing;
+  donationType?: DonationType;
 }
 
-export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
+export const ListingCard: React.FC<ListingCardProps> = ({
+  listing,
+  donationType,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isDonor = localStorage.getItem("isDonor");
 
   const formatDate = (dateString: string): string => {
     return new Date(dateString).toLocaleDateString("en-US", {

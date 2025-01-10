@@ -3,7 +3,7 @@ import { Listing } from "../lib/types";
 import { ListingCard } from "../components/ui/VendorInfo";
 import axiosFetch from "../lib/axiosFetch";
 
-type DonationType = "foodbank" | "expired";
+export type DonationType = "foodbank" | "expired";
 
 const Toggle: React.FC<{
   selected: DonationType;
@@ -127,6 +127,7 @@ const Donations: React.FC = () => {
             ) : (
               listings.map((listing, index) => (
                 <ListingCard
+                  donationType={donationType}
                   key={`${listing.vendorId._id}-${index}`}
                   listing={listing}
                 />
