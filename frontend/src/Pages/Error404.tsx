@@ -1,6 +1,6 @@
 export const Error404 = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 text-gray-800">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-300 to-lime-200 text-gray-800">
       <div className="rounded-lg bg-white p-12 shadow-2xl text-center max-w-sm">
         <h1 className="text-8xl font-extrabold text-green-700 mb-6">404</h1>
         <p className="text-lg text-gray-600 mb-8">

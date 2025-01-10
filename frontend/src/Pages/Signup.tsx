@@ -64,28 +64,28 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 py-16 px-4">
-      <div className="max-w-4xl mx-auto flex flex-col lg:flex-row gap-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 py-12 px-6 md:px-8">
+      <div className="max-w-3xl mx-auto flex flex-col lg:flex-row gap-8">
         {/* Form Section */}
-        <div className="flex-1 bg-white rounded-xl shadow-lg p-6 space-y-6">
+        <div className="flex-1 bg-white rounded-xl shadow-lg p-8 space-y-6">
           {/* Toggle Switch */}
-          <div className="flex bg-gray-100 rounded-full p-1 mb-6">
+          <div className="flex justify-center gap-4 mb-6">
             <button
               onClick={() => setUserType("vendor")}
-              className={`flex-1 flex items-center justify-center gap-2 py-2 px-6 rounded-full text-lg font-medium transition-all ${
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-full text-lg font-medium transition-all ${
                 userType === "vendor"
-                  ? "bg-white text-green-600 shadow-md"
-                  : "text-gray-500 hover:text-gray-900"
+                  ? "bg-green-600 text-white shadow-lg"
+                  : "text-gray-600 hover:text-gray-900"
               }`}>
               <Building2 className="h-5 w-5" />
               <span>Vendor</span>
             </button>
             <button
               onClick={() => setUserType("foodbank")}
-              className={`flex-1 flex items-center justify-center gap-2 py-2 px-6 rounded-full text-lg font-medium transition-all ${
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-full text-lg font-medium transition-all ${
                 userType === "foodbank"
-                  ? "bg-white text-green-600 shadow-md"
-                  : "text-gray-500 hover:text-gray-900"
+                  ? "bg-green-600 text-white shadow-lg"
+                  : "text-gray-600 hover:text-gray-900"
               }`}>
               <Heart className="h-5 w-5" />
               <span>Food Bank</span>
@@ -94,10 +94,8 @@ const SignUpPage = () => {
 
           {/* Title */}
           <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-900">
-              Create your account
-            </h1>
-            <p className="text-gray-600 mt-2 text-lg">
+            <h1 className="text-3xl font-bold text-gray-900">Create your account</h1>
+            <p className="text-lg text-gray-600 mt-2">
               {userType === "vendor"
                 ? "Join as a food vendor to start donating"
                 : "Register your food bank to receive donations"}
@@ -109,54 +107,46 @@ const SignUpPage = () => {
             {/* Required Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Name
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Name</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full  px-4 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Email</label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full  px-4 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Phone Number
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Phone Number</label>
                 <input
                   type="tel"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
-                  className="w-full  px-4 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Password
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full  px-4 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
                     required
                   />
                   <button
@@ -175,13 +165,11 @@ const SignUpPage = () => {
 
             {/* Location Section */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Address
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Address</label>
               <textarea
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="w-full  px-4 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
                 rows={2}
                 required
               />
@@ -194,16 +182,13 @@ const SignUpPage = () => {
               <MapPin className="h-5 w-5" />
               {showMap ? "Hide Map" : "Pick Location on Map"}
             </button>
+
             {/* Map Section */}
             {showMap && (
               <div className="flex-1 bg-white rounded-xl shadow-lg overflow-hidden mt-6">
                 <div className="p-6 bg-gray-50 border-b">
-                  <h3 className="text-lg font-medium text-gray-900">
-                    Select Your Location
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    Click on the map to set your location
-                  </p>
+                  <h3 className="text-lg font-medium text-gray-900">Select Your Location</h3>
+                  <p className="text-sm text-gray-600">Click on the map to set your location</p>
                 </div>
                 <div className="h-[400px]">
                   <Map location={location} setLocation={setLocation} />
@@ -213,31 +198,25 @@ const SignUpPage = () => {
 
             {/* Optional Fields */}
             <div className="space-y-6 border-t pt-6">
-              <h3 className="text-lg font-medium text-gray-900">
-                Additional Information
-              </h3>
+              <h3 className="text-lg font-medium text-gray-900">Additional Information</h3>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Profile Photo URL
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Profile Photo URL</label>
                 <input
                   type="url"
                   value={photoUrl}
                   onChange={(e) => setPhotoUrl(e.target.value)}
-                  className="w-full  px-4 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
                   placeholder="Optional"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Description
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Description</label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full  px-4 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
                   rows={3}
                   placeholder="Tell us about your organization (optional)"
                 />
@@ -257,7 +236,7 @@ const SignUpPage = () => {
             <a
               href="#"
               className="text-green-600 hover:text-green-700 font-medium">
-              Sign in
+              Log in
             </a>
           </p>
         </div>
