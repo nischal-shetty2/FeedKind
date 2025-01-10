@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   Search,
   ArrowRight,
@@ -15,18 +16,18 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useInView } from "react-intersection-observer";
-import Button from "../components/ui/button";
+
+interface CountUpNumberProps {
+  end: number;
+  duration?: number;
+  inView: boolean;
+}
 
 const CountUpNumber = ({
   end,
   duration = 2000,
   inView,
-}: {
-  end: number;
-  duration?: number;
-  inView: boolean;
-}) => {
+}: CountUpNumberProps) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -54,11 +55,33 @@ const CountUpNumber = ({
   return <span>{count.toLocaleString()}</span>;
 };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 const Home = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const impactData = [
     { month: "Jan", donations: 2100 },
@@ -72,40 +95,73 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section with animated gradient */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-green-50 via-emerald-50 to-green-50 animate-gradient-x">
+      {/* Hero Section with enhanced animations */}
+      <motion.div
+        className="relative overflow-hidden bg-gradient-to-r from-green-50 via-emerald-50 to-green-50"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
         <div className="container mx-auto px-4 py-20 relative">
-          <div className="max-w-3xl">
-            <div className="animate-fade-in-up">
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Transform Surplus into
-                <span className="text-green-600"> Hope</span>
-              </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Join our mission to reduce food waste and fight hunger. We
-                connect food donors with food banks, making a real difference in
-                communities across the nation.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  className="bg-green-600 hover:bg-green-700 transform hover:scale-105 transition-all"
-                  onClick={() => (window.location.href = "/login")}>
-                  Start Donating Today
-                  <ArrowUpRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button className="hover:bg-green-700 transform hover:scale-105 transition-all">
-                  Join as Food Bank
-                  <Heart className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
+          <motion.div
+            className="max-w-3xl"
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              Transform Surplus into
+              <motion.span
+                className="text-green-600"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                {" "}
+                Hope
+              </motion.span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              Join our mission to reduce food waste and fight hunger. We connect
+              food donors with food banks, making a real difference in
+              communities across the nation.
+            </p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.button
+                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center justify-center"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => (window.location.href = "/signup")}
+              >
+                Start Donating Today
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </motion.button>
+              <motion.button
+                className="px-6 py-3 bg-white text-green-600 border border-green-600 rounded-lg hover:bg-green-50 flex items-center justify-center"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => (window.location.href = "/signup")}
+              >
+                Join as Food Bank
+                <Heart className="ml-2 h-4 w-4" />
+              </motion.button>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Stats Section - Moved Up */}
-      <div ref={ref} className="bg-white py-16 -mt-8">
+      {/* Stats Section with Stagger Animation */}
+      <motion.div
+        className="bg-white py-16 -mt-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+      >
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -125,24 +181,36 @@ const Home = () => {
                 icon: <Heart className="h-6 w-6 text-green-600" />,
               },
             ].map((stat, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <div className="flex items-center justify-center mb-4">
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white p-6 rounded-xl shadow-lg"
+              >
+                <motion.div
+                  className="flex items-center justify-center mb-4"
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 2, delay: index * 0.2 }}
+                >
                   {stat.icon}
-                </div>
+                </motion.div>
                 <div className="text-4xl font-bold text-green-600 mb-2 text-center">
-                  <CountUpNumber end={stat.number} inView={inView} />+
+                  <CountUpNumber end={stat.number} inView={isVisible} />+
                 </div>
                 <div className="text-gray-600 text-center">{stat.label}</div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Impact Graph Section */}
-      <div className="bg-white py-16">
+      {/* Impact Graph Section with Animation */}
+      <motion.div
+        className="bg-white py-16"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
             Our Growing Impact
@@ -165,24 +233,42 @@ const Home = () => {
             </ResponsiveContainer>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Search Section with Animation */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-2xl mx-auto transform hover:scale-105 transition-all">
+      {/* Search Section with Enhanced Animation */}
+      <motion.div
+        className="container mx-auto px-4 py-12"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div
+          className="max-w-2xl mx-auto"
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           <div className="relative">
-            <input
+            <motion.input
               type="text"
               placeholder="Search for available food donations in your area..."
               className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-lg"
+              initial={{ width: "80%" }}
+              whileFocus={{ width: "100%" }}
+              transition={{ duration: 0.3 }}
             />
             <Search className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      {/* How It Works Section with Hover Effects */}
-      <div className="bg-gray-50 py-16">
+      {/* How It Works Section with Enhanced Animations */}
+      <motion.div
+        className="bg-gray-50 py-16"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -206,23 +292,49 @@ const Home = () => {
                   "Connect and arrange food pickup through our platform.",
               },
             ].map((item, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="flex justify-center mb-4">{item.icon}</div>
+                variants={itemVariants}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+                }}
+                className="bg-white p-6 rounded-xl shadow-lg"
+              >
+                <motion.div
+                  className="flex justify-center mb-4"
+                  animate={{ rotateY: [0, 360] }}
+                  transition={{
+                    duration: 2,
+                    delay: index * 0.3,
+                    repeat: Infinity,
+                  }}
+                >
+                  {item.icon}
+                </motion.div>
                 <h3 className="text-xl font-semibold mb-2 text-center">
                   {item.title}
                 </h3>
                 <p className="text-gray-600 text-center">{item.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* CTA Section with Animation */}
-      <div className="bg-gradient-to-r from-green-600 to-emerald-600 py-16">
-        <div className="container mx-auto px-4 text-center">
+      {/* CTA Section with Enhanced Animation */}
+      <motion.div
+        className="bg-gradient-to-r from-green-600 to-emerald-600 py-16"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        <motion.div
+          className="container mx-auto px-4 text-center"
+          initial={{ y: 50 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <h2 className="text-3xl font-bold mb-6 text-white">
             Ready to Make a Difference?
           </h2>
@@ -230,12 +342,16 @@ const Home = () => {
             Join our growing community of food donors and food banks working
             together to reduce waste and fight hunger.
           </p>
-          <Button className="bg-white text-green-600 hover:bg-green-50 transform hover:scale-105 transition-all">
+          <motion.button
+            className="px-6 py-3 bg-white text-green-600 rounded-lg hover:bg-green-50 flex items-center justify-center mx-auto"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
             Get Started Now
             <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
-      </div>
+          </motion.button>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
