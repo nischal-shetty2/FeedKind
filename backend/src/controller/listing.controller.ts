@@ -3,9 +3,7 @@ import ItemListing from "../models/ItemsListing";
 import { Request, Response } from "express";
 import { IItemListing } from "../models/ItemsListing";
 import { CustomRequest } from "../types/CustomeRequest";
-import { error } from "console";
 import { IUser } from "../types/User";
-import User from "../models/User";
 
 const DaysBeforeExpiration = 4;
 
@@ -76,16 +74,12 @@ const listDiscountedItems = async (
       currentDate.getTime() + DaysBeforeExpiration * 24 * 60 * 60 * 1000
     );
 
-    // Fetch listings and populate vendorId with User details
     const itemListings: any = await ItemListing.find({
       bulkExpirationDate: { $gte: fourDaysLater },
-    }).populate("vendorId"); // Populate the vendorId with User data
+    }).populate("vendorId");
 
     console.log("Discount Listing:");
-    // const viewList: any = itemListings.map(async (bulk) => {
-    //   user: await User.find({ _id: bulk.id });
-    // });
-    console.log(itemListings);
+
     res.status(200).json({
       error: false,
       listings: itemListings,
@@ -109,6 +103,29 @@ const listDonationItems = async (_: Request, res: Response): Promise<void> => {
         $lte: new Date(currentDate.getTime() + 4 * 24 * 60 * 60 * 1000),
       },
     }).populate("vendorId");
+
+    res.status(200).json({
+      error: false,
+      listings,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: true,
+      message: "Server error, could not fetch listings.",
+    });
+  }
+};
+
+const listExpiredItems = async (_: Request, res: Response): Promise<void> => {
+  try {
+    const currentDate = new Date();
+
+    const listings: IItemListing[] = await ItemListing.find({
+      bulkExpirationDate: {
+        $lt: new Date(currentDate.getTime()),
+      },
+    }).populate("vendorId");
     console.log("Donation Listing:");
     res.status(200).json({
       error: false,
@@ -123,4 +140,9 @@ const listDonationItems = async (_: Request, res: Response): Promise<void> => {
   }
 };
 
-export default { addVendorListing, listDiscountedItems, listDonationItems };
+export default {
+  addVendorListing,
+  listDiscountedItems,
+  listDonationItems,
+  listExpiredItems,
+};
