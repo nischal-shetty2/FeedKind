@@ -108,14 +108,15 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-green-50">
+
       {/* Hero Section with Background */}
       <motion.div
-  className="relative overflow-hidden bg-[url('https://wishesandblessings.net/public/images/food_all.jpg')] bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:bg-black/10 before:backdrop-blur-sm"
+  className="relative overflow-hidden bg-[url('https://wishesandblessings.net/public/images/food_all.jpg')] bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:bg-black/10 before:backdrop-blur-sm before:shadow-3xl"
   initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-olive-900/70 via-olive-800/60 to-olive-700/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-olive-900/70 via-olive-800/60 to-olive-700/50 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.4)" />
         <div className="container mx-auto px-4 py-20 relative">
           <motion.div
             className="max-w-3xl"
