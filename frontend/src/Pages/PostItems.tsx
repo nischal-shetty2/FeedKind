@@ -15,6 +15,7 @@ interface ScannedItem {
   product_name: string;
   expire_date: string;
   manufacture_date?: string;
+  price: number;
 }
 
 const productDatabase: Product[] = [
@@ -28,6 +29,13 @@ const productDatabase: Product[] = [
   {
     barcode: "8901491502030",
     product_name: "Lays",
+    manufacture_date: "30/12/2024",
+    expire_date: "29/04/2025",
+    price: 10,
+  },
+  {
+    barcode: "8901063092730",
+    product_name: "good day cashew",
     manufacture_date: "30/12/2024",
     expire_date: "29/04/2025",
     price: 10,
@@ -79,14 +87,18 @@ const productDatabase: Product[] = [
 const PostItems: React.FC = () => {
   const scannerRef = useRef<HTMLVideoElement>(null);
   const [scannedItems, setScannedItems] = useState<ScannedItem[]>([]);
-  const [bulkExpiryDate, setBulkExpiryDate] = useState<string>("");
+  const [bulkExpirationDate, setBulkExpirationDate] = useState<string>("");
   const [isManualEntry, setIsManualEntry] = useState(false);
   const [manualItem, setManualItem] = useState({
     product_name: "",
     expire_date: "",
     manufacture_date: "",
+    price: 0,
   });
   const [earliestExpiry, setEarliestExpiry] = useState<string>("");
+
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     if (scannedItems.length > 0) {
@@ -129,6 +141,7 @@ const PostItems: React.FC = () => {
                     product_name: foundProduct.product_name,
                     expire_date: foundProduct.expire_date,
                     manufacture_date: foundProduct.manufacture_date,
+                    price: foundProduct.price,
                   },
                 ]);
               }
@@ -148,7 +161,7 @@ const PostItems: React.FC = () => {
   }, [scannerRef.current, scannedItems]);
 
   const handleManualAdd = () => {
-    if (manualItem.product_name && manualItem.expire_date) {
+    if (manualItem.product_name && manualItem.expire_date && manualItem.price) {
       if (
         !scannedItems.some(
           (item) => item.product_name === manualItem.product_name
@@ -159,6 +172,7 @@ const PostItems: React.FC = () => {
           product_name: "",
           expire_date: "",
           manufacture_date: "",
+          price: 0,
         });
       }
     }
@@ -178,20 +192,30 @@ const PostItems: React.FC = () => {
       items: scannedItems.map((item) => ({
         name: item.product_name,
         expireDate: item.expire_date,
+        price: item.price,
       })),
-      bulkExpiryDate: bulkExpiryDate || earliestExpiry,
+      bulkExpirationDate: bulkExpirationDate || earliestExpiry,
     };
+    if (!token || !bulkExpirationDate) return;
 
     try {
-      const response = await axiosFetch.post(`/listing/${vendorId}`, {
-        payload,
-      });
+      const response = await axiosFetch.post(
+        `/listing/${vendorId}`,
+        {
+          payload,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const { error } = response.data;
 
       if (error) {
         setScannedItems([]);
-        setBulkExpiryDate("");
+        setBulkExpirationDate("");
         throw new Error("failed to post");
       }
       window.location.href = "/discounts";
@@ -199,6 +223,10 @@ const PostItems: React.FC = () => {
       console.error("Error posting items:", error);
     }
   };
+
+  if (!token || !userId) {
+    window.location.href = "/signup";
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-50 p-4 gap-4">
@@ -308,8 +336,8 @@ const PostItems: React.FC = () => {
               </label>
               <input
                 type="date"
-                value={bulkExpiryDate}
-                onChange={(e) => setBulkExpiryDate(e.target.value)}
+                value={bulkExpirationDate}
+                onChange={(e) => setBulkExpirationDate(e.target.value)}
                 min={new Date().toISOString().split("T")[0]}
                 max={earliestExpiry}
                 className="w-full px-4 py-2 border rounded-lg"
