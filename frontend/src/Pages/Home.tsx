@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Utensils, Building2, Heart, ArrowUpRight, TrendingUp, Search } from "lucide-react";
+import { Utensils, Building2, Heart, ArrowUpRight, TrendingUp, Search, Trash2, Users, Save, LifeBuoy, HeartPulse } from "lucide-react";
 import { XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts";
 import { useNavigate } from "react-router-dom";  // Import useNavigate
 
@@ -71,7 +71,6 @@ const Home = () => {
   useEffect(() => {
     setIsVisible(true);
   }, []);
-
   const impactData = [
     { month: "Jan", donations: 2100, recipients: 1890, efficiency: 95 },
     { month: "Feb", donations: 3400, recipients: 3128, efficiency: 97 },
@@ -81,29 +80,32 @@ const Home = () => {
     { month: "Jun", donations: 8200, recipients: 7790, efficiency: 94 },
     { month: "Jul", donations: 10000, recipients: 9500, efficiency: 99 },
   ];
+  
+
 
   const metrics = {
     donations: {
-      label: "Total Donations",
+      label: "Global Food Wastage",
       color: "#059669",
-      value: "10,000+",
-      growth: "+47%",
-      description: "Monthly food donations across all partners"
+      value: "931M Tons",
+      growth: "-17%",
+      description: "Million tons of food wasted annually worldwide",
     },
     recipients: {
-      label: "Recipients Reached",
+      label: "Hunger Crisis",
       color: "#0284c7",
-      value: "9,500+",
-      growth: "+42%",
-      description: "People receiving food assistance monthly"
+      value: "828M People",
+      growth: "-13%",
+      description: "Million people suffering from hunger worldwide",
     },
     efficiency: {
-      label: "Distribution Efficiency",
+      label: "Food Saved",      
       color: "#7c3aed",
-      value: "99%",
-      growth: "+4%",
-      description: "Success rate of food distribution"
-    }
+      value: "25M Tons",
+      growth: "+15%",
+      description:
+        "Million tons of food saved annually through food bank initiatives",
+    },
   };
 
   return (
@@ -111,7 +113,7 @@ const Home = () => {
 
       {/* Hero Section with Background */}
       <motion.div
-  className="relative overflow-hidden bg-[url('https://wishesandblessings.net/public/images/food_all.jpg')] bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:bg-black/10 before:backdrop-blur-sm before:shadow-3xl"
+  className="relative overflow-hidden bg-[url('https://wishesandblessings.net/public/images/food_all.jpg')] bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:bg-black/60 before:backdrop-blur-sm before:shadow-3xl"
   initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -162,52 +164,64 @@ const Home = () => {
         </div>
       </motion.div>
 
-      {/* Stats Section */}
-      <motion.div
-        className="bg-white py-16 -mt-8"
-        variants={containerVariants}
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
-      >
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                number: 10000,
-                label: "Meals Donated",
-                icon: <Utensils className="h-6 w-7 text-green-600" />,
-              },
-              {
-                number: 500,
-                label: "Active Donors",
-                icon: <Building2 className="h-6 w-7 text-green-600" />,
-              },
-              {
-                number: 200,
-                label: "Food Banks Served",
-                icon: <Heart className="h-6 w-7 text-green-600" />,
-              },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-green-50 to-green-100 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all"
-              >
-                <div className="flex items-center justify-center mb-4">
-                  <div className="p-3 bg-green-50 rounded-full">
-                    {stat.icon}
-                  </div>
-                </div>
-                <div className="text-4xl font-bold text-green-600 mb-2 text-center">
-                  <CountUpNumber end={stat.number} inView={isVisible} />+
-                </div>
-                <div className="text-gray-600 text-center font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
+{/* Stats Section */}
+<motion.div
+  className="bg-gray-50 py-16 -mt-8"
+  variants={containerVariants}
+  initial="hidden"
+  animate={isVisible ? "visible" : "hidden"}
+>
+  <div className="container mx-auto px-4">
+    <div className="grid md:grid-cols-3 gap-8">
+      {[
+        {
+          number: 931,
+          label: "Million Tons of Food Wasted Annually",
+          description:
+            "Approximately 931 million tons of food is wasted every year globally, which accounts for nearly 17% of total food production.",
+          icon: <Trash2 className="h-6 w-7 text-red-300" />,
+        },
+        {
+          number: 828,
+          label: "Million People Facing Hunger",
+          description:
+            "Over 828 million people suffer from hunger worldwide, highlighting the need for better food distribution systems.",
+          icon: <Users className="h-6 w-7 text-yellow-500" />,
+        },
+        {
+          number: 25,
+          label: "Million Tons of Food Saved",
+          description:
+            "Food banks and community initiatives have collectively saved 25 million tons of food from going to waste.",
+          icon: <HeartPulse className="h-6 w-7 text-green-600" />,
+        },
+      ].map((stat, index) => (
+        <motion.div
+          key={index}
+          variants={itemVariants}
+          whileHover={{ scale: 1.05 }}
+          className="bg-gradient-to-r from-green-300 to-green-200 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-green-300 transition-all"
+        >
+          <div className="flex items-center justify-center mb-4">
+            <div className="p-3 bg-white rounded-full shadow-md">
+              {stat.icon}
+            </div>
           </div>
-        </div>
-      </motion.div>
+          <div className="text-4xl font-bold text-green-700 mb-2 text-center">
+            <CountUpNumber end={stat.number} inView={isVisible} />+
+          </div>
+          <div className="text-green-800 text-center font-medium mb-2">
+            {stat.label}
+          </div>
+          <p className="text-sm text-gray-600 text-center">
+            {stat.description}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</motion.div>
+
 
       {/* Enhanced Impact Graph Section */}
       <motion.div
