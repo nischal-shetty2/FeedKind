@@ -9,8 +9,6 @@ import {
   Search,
   Trash2,
   Users,
-  Save,
-  LifeBuoy,
   HeartPulse,
 } from "lucide-react";
 import {
@@ -217,7 +215,7 @@ const Home = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
-                className='bg-gradient-to-r from-green-300 to-green-00 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-green-300 transition-all'
+                className='bg-gradient-to-r bg-green-600/15 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-green-300/30 transition-all'
               >
                 <div className='flex items-center justify-center mb-4'>
                   <div className='p-3 bg-white rounded-full shadow-md'>
