@@ -6,18 +6,18 @@ interface VendorInfoProps {
 }
 
 export const VendorInfo: React.FC<VendorInfoProps> = ({ vendor }) => (
-  <div className="space-y-2">
-    <div className="flex items-center space-x-2">
-      <MapPin className="w-4 h-4" />
-      <span className="text-sm">{vendor.address}</span>
+  <div className='space-y-2'>
+    <div className='flex items-center space-x-2'>
+      <MapPin className='w-4 h-4' />
+      <span className='text-sm'>{vendor.address}</span>
     </div>
-    <div className="flex items-center space-x-2">
-      <Phone className="w-4 h-4" />
-      <span className="text-sm">{vendor.phoneNumber}</span>
+    <div className='flex items-center space-x-2'>
+      <Phone className='w-4 h-4' />
+      <span className='text-sm'>{vendor.phoneNumber}</span>
     </div>
-    <div className="flex items-center space-x-2">
-      <Mail className="w-4 h-4" />
-      <span className="text-sm">{vendor.email}</span>
+    <div className='flex items-center space-x-2'>
+      <Mail className='w-4 h-4' />
+      <span className='text-sm'>{vendor.email}</span>
     </div>
   </div>
 );
@@ -51,35 +51,36 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 
   return (
     <>
-      <Card className="relative">
+      <Card className='relative'>
         <CardHeader>
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="text-xl font-bold">{listing.vendorId.name}</h2>
+          <div className='flex items-center justify-between mb-2'>
+            <h2 className='text-xl font-bold'>{listing.vendorId.name}</h2>
             {listing.vendorId.isADonor && (
-              <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+              <span className='bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded'>
                 Donor
               </span>
             )}
           </div>
-          <p className="text-sm text-gray-500">
+          <p className='text-sm text-gray-500'>
             {listing.vendorId.description}
           </p>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className='space-y-4'>
             <VendorInfo vendor={listing.vendorId} />
-            <div className="mt-4">
-              <h3 className="font-semibold mb-2">Available Items:</h3>
-              <ItemList items={listing.items} />
+            <div className='mt-4'>
+              <h3 className='font-semibold mb-2'>Available Items:</h3>
+              <ItemList donationType={donationType} items={listing.items} />
               {listing.items.length > 3 && (
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full mt-2 py-2 px-4 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-md transition-colors">
+                  className='w-full mt-2 py-2 px-4 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-md transition-colors'
+                >
                   View All {listing.items.length} Items
                 </button>
               )}
             </div>
-            <div className="text-sm text-gray-500 mt-2">
+            <div className='text-sm text-gray-500 mt-2'>
               Deadline: {formatDate(listing.bulkExpirationDate)}
             </div>
           </div>
@@ -87,22 +88,22 @@ export const ListingCard: React.FC<ListingCardProps> = ({
       </Card>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold">{listing.vendorId.name}</h2>
+        <div className='space-y-4'>
+          <div className='flex items-center justify-between'>
+            <h2 className='text-2xl font-bold'>{listing.vendorId.name}</h2>
             {listing.vendorId.isADonor && (
-              <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+              <span className='bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded'>
                 Donor
               </span>
             )}
           </div>
-          <p className="text-gray-500">{listing.vendorId.description}</p>
+          <p className='text-gray-500'>{listing.vendorId.description}</p>
           <VendorInfo vendor={listing.vendorId} />
           <div>
-            <h3 className="font-semibold text-lg mb-3">All Available Items</h3>
+            <h3 className='font-semibold text-lg mb-3'>All Available Items</h3>
             <ItemList items={listing.items} showAll={true} />
           </div>
-          <div className="text-sm text-gray-500">
+          <div className='text-sm text-gray-500'>
             Deadline: {formatDate(listing.bulkExpirationDate)}
           </div>
         </div>
