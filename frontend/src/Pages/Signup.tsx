@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Eye, EyeOff, Building2, Heart, MapPin } from "lucide-react";
+import { Eye, EyeOff, Building2, Heart } from "lucide-react";
 import Map from "./Map";
 import axiosFetch from "../lib/axiosFetch";
 

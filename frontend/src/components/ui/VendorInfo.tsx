@@ -39,7 +39,6 @@ export const ListingCard: React.FC<ListingCardProps> = ({
   donationType,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isDonor = localStorage.getItem("isDonor");
 
   const formatDate = (dateString: string): string => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -70,7 +69,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({
             <VendorInfo vendor={listing.vendorId} />
             <div className="mt-4">
               <h3 className="font-semibold mb-2">Available Items:</h3>
-              <ItemList items={listing.items} />
+              <ItemList donationType={donationType} items={listing.items} />
               {listing.items.length > 3 && (
                 <button
                   onClick={() => setIsModalOpen(true)}

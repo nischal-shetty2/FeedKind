@@ -161,6 +161,9 @@ const PostItems: React.FC = () => {
   }, [scannerRef.current, scannedItems]);
 
   const handleManualAdd = () => {
+    console.log(manualItem.expire_date);
+    console.log(manualItem.price);
+    console.log(manualItem.product_name);
     if (manualItem.product_name && manualItem.expire_date && manualItem.price) {
       if (
         !scannedItems.some(
@@ -289,6 +292,19 @@ const PostItems: React.FC = () => {
                   setManualItem((prev) => ({
                     ...prev,
                     expire_date: e.target.value,
+                  }))
+                }
+                className="w-full px-4 py-2 border rounded-lg"
+              />
+
+              <input
+                type="number"
+                placeholder="Price"
+                value={manualItem.price}
+                onChange={(e) =>
+                  setManualItem((prev) => ({
+                    ...prev,
+                    price: Number(e.target.value),
                   }))
                 }
                 className="w-full px-4 py-2 border rounded-lg"

@@ -1,17 +1,20 @@
 // ItemList.tsx
 import { Calendar } from "lucide-react";
 import { Item } from "../lib/types";
+import { DonationType } from "../Pages/Donations";
 
 interface ItemListProps {
   items: Item[];
   maxItems?: number;
   showAll?: boolean;
+  donationType?: DonationType;
 }
 
 export const ItemList: React.FC<ItemListProps> = ({
   items,
   maxItems = 3,
   showAll = false,
+  donationType,
 }) => {
   const displayItems = showAll ? items : items.slice(0, maxItems);
   const hasMoreItems = items.length > maxItems;
@@ -23,7 +26,6 @@ export const ItemList: React.FC<ItemListProps> = ({
       day: "numeric",
     });
   };
-
   return (
     <div className="space-y-2">
       {displayItems.map((item, index) => (
@@ -42,10 +44,14 @@ export const ItemList: React.FC<ItemListProps> = ({
               {formatDate(item.expirationDate)}
             </div>
           </div>
-          <div className="flex flex-col items-end">
-            <p className="text-green-500">50% off</p>
-            <p className="font-semibold">₹{(item.price / 2).toFixed(2)}</p>
-          </div>
+          {!donationType && (
+            <div className="flex flex-col items-end">
+              <div>
+                <p className="text-green-500">50% off</p>
+                <p className="font-semibold">₹{(item.price / 2).toFixed(2)}</p>
+              </div>
+            </div>
+          )}
         </div>
       ))}
       {!showAll && hasMoreItems && (

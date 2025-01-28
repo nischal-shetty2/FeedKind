@@ -5,12 +5,11 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const isDonor = localStorage.getItem("isDonor");
   const isLoggedin = !!localStorage.getItem("token");
   const navItems = [
     { name: "Discounts", href: "/discount" },
-    ...(isDonor ? [] : [{ name: "Donations", href: "/donations" }]),
-    ...(!isDonor ? [] : [{ name: "List item", href: "/postitems" }]),
+    { name: "Donations", href: "/donations" },
+    { name: "List item", href: "/postitems" },
     ...(isLoggedin ? [] : [{ name: "Login", href: "/login" }]),
   ];
 

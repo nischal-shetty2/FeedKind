@@ -3,32 +3,36 @@ import { Listing } from "../lib/types";
 import { ListingCard } from "../components/ui/VendorInfo";
 import axiosFetch from "../lib/axiosFetch";
 
-export type DonationType = "foodbank" | "expired";
+export type DonationType = "foodbank" | "expired" | null;
 
 const Toggle: React.FC<{
   selected: DonationType;
   onToggle: (type: DonationType) => void;
 }> = ({ selected, onToggle }) => {
   return (
-    <div className="flex space-x-2 bg-gray-100 p-1 rounded-lg w-fit">
-      <button
-        onClick={() => onToggle("foodbank")}
-        className={`px-4 py-2 rounded-md transition-all ${
-          selected === "foodbank"
-            ? "bg-white text-blue-600 shadow-sm"
-            : "text-gray-600 hover:text-gray-900"
-        }`}>
-        Food Banks
-      </button>
-      <button
-        onClick={() => onToggle("expired")}
-        className={`px-4 py-2 rounded-md transition-all ${
-          selected === "expired"
-            ? "bg-white text-blue-600 shadow-sm"
-            : "text-gray-600 hover:text-gray-900"
-        }`}>
-        Composters
-      </button>
+    <div className="flex space-x-2 bg-gray-100 p-1 rounded-lg w-full justify-between">
+      <div className=" flex justify-center w-full">
+        <button
+          onClick={() => onToggle("foodbank")}
+          className={`px-4 w-full py-2 rounded-md transition-all ${
+            selected === "foodbank"
+              ? "bg-white text-blue-600 shadow-sm"
+              : "text-gray-800 hover:text-gray-900"
+          }`}>
+          Food Banks
+        </button>
+      </div>
+      <div className=" flex justify-center w-full">
+        <button
+          onClick={() => onToggle("expired")}
+          className={`px-4 w-full  py-2 rounded-md transition-all ${
+            selected === "expired"
+              ? "bg-white text-blue-600 shadow-sm"
+              : "text-gray-800 hover:text-gray-900"
+          }`}>
+          Composters
+        </button>
+      </div>
     </div>
   );
 };

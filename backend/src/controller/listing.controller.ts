@@ -123,7 +123,6 @@ const expiredItems = async (_: Request, res: Response): Promise<void> => {
         $lt: new Date(currentDate.getTime()),
       },
     }).populate("vendorId");
-    console.log("Donation Listing:");
     res.status(200).json({
       error: false,
       listings,
