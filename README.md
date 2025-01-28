@@ -58,15 +58,14 @@ Food waste is a critical global issue, contributing to environmental harm, resou
 
 - **Donor Login**:  
    - Enables stores to add products and manage inventory efficiently.  
-   - Streamlines tracking and updates of product statuses.  
-
-   ![image](https://github.com/user-attachments/assets/e8150562-abdf-47c5-853a-cd6cab1b7e7e)
-
+   - Streamlines tracking and updates of product statuses.
+ 
 - **Food Bank Login**:  
    - Empowers food banks to claim items and distribute them to those in need.  
    - Provides visibility into available products for quicker action.  
 
-   ![image](https://github.com/user-attachments/assets/95dcdb94-0020-4307-86c0-1ffcc0e5f3fd)
+   ![image](https://github.com/user-attachments/assets/e8150562-abdf-47c5-853a-cd6cab1b7e7e)
+
 
 ---
 
