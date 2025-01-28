@@ -1,1 +1,1 @@
-FoodKind frontend
+FeedKind frontend
